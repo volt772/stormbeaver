@@ -1,8 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from controllers import users, jobs, filters, routes, settings
+from controllers import weather
 from database.database_connection import close_db_pool
-
 
 app = FastAPI()
 
@@ -15,11 +14,7 @@ app.add_middleware(
 )
 
 # 각 라우터 포함
-app.include_router(users.router)
-app.include_router(jobs.router)
-app.include_router(filters.router)
-app.include_router(routes.router)
-app.include_router(settings.router)
+app.include_router(weather.router)
 
 
 @app.on_event("shutdown")
@@ -32,4 +27,4 @@ def shutdown_db_pool():
 if __name__ == "__main__":
     import uvicorn
 
-    uvicorn.run(app, host="0.0.0.0", port=5300, reload=True)
+    uvicorn.run(app, host="0.0.0.0", port=5532, reload=True)

@@ -1,5 +1,6 @@
 import random
 import string
+from datetime import datetime
 
 
 def generate_random_name(email: str) -> str:
@@ -7,3 +8,7 @@ def generate_random_name(email: str) -> str:
     email_id = email.split("@")[0]
     random_chars = "".join(random.choices(string.ascii_uppercase, k=5))
     return f"{email_id}{random_chars}"
+
+
+def get_current_hour_timestamp() -> datetime:
+    return datetime.now().replace(minute=0, second=0, microsecond=0)

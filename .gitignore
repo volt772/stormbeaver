@@ -205,3 +205,11 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+.vscode/sftp.json
+api/.DS_Store
+controllers/.DS_Store
+models/.DS_Store
+sftp-config.json
+.DS_Store
+.DS_Store
+sftp-config.json

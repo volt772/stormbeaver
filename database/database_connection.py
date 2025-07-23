@@ -8,11 +8,11 @@ from pathlib import Path
 
 # ✅ 환경 변수 자동 감지 (기본값: development)
 env_mode = os.getenv("ENV", "development")
-env_file = f"/home/volt772/work/source/chikorita/remote/.env.{env_mode}"
+env_file = f"/home/volt772/work/source/stormbeaver/.env.{env_mode}"
 
 # ✅ 해당 .env 파일이 존재하지 않으면 기본 .env 파일 사용
 if not Path(env_file).exists():
-    env_file = "/home/volt772/work/source/chikorita/remote/.env"
+    env_file = "/home/volt772/work/source/stormbeaver/.env"
 
 load_dotenv(env_file)  # ✅ .env 파일 로드
 
