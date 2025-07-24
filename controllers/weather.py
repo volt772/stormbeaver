@@ -28,7 +28,6 @@ async def get_openapi_weather(query: WeatherQuery = Depends()):
     current_date = get_current_hour_timestamp()
     isExist = select_current_weather(query.stadium_code, query.league, current_date)
 
-    print("IS EXISTS : ", isExist)
     if not isExist:
         # 없으면 네트워크 요청 후, DB 쿼리
         await get_weather(query)
@@ -61,10 +60,12 @@ async def get_weather(query: WeatherQuery):
         stadium_code=query.stadium_code,
         weather_json=current,  # API 응답 전체 dict
         updated_at=get_current_hour_timestamp(),
+        league=query.league
     )
 
     insert_forecast_weather(
         stadium_code=query.stadium_code,
         weather_json=forecast,  # API에서 받은 forecast 응답 전체
         updated_at=get_current_hour_timestamp(),
+        league=query.league
     )

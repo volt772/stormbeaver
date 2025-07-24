@@ -41,28 +41,28 @@ def insert_download_log(league: str, stadium_code: str, updated_at: datetime):
     )
 
 
-def insert_current_weather(stadium_code: str, weather_json: dict, updated_at):
-    delete_query = "DELETE FROM current_weather WHERE stadium_code = %s"
-    execute(query=delete_query, params=(stadium_code,))
+def insert_current_weather(stadium_code: str, weather_json: dict, updated_at, league: str):
+    delete_query = "DELETE FROM current_weather WHERE stadium_code = %s AND league = %s"
+    execute(query=delete_query, params=(stadium_code, league,))
 
     insert_query = """
-        INSERT INTO current_weather (stadium_code, weather_json, updated_at)
-        VALUES (%s, %s, %s)
+        INSERT INTO current_weather (stadium_code, league, weather_json, updated_at)
+        VALUES (%s, %s, %s, %s)
     """
-    execute(query=insert_query, params=(stadium_code, json.dumps(weather_json), updated_at))
+    execute(query=insert_query, params=(stadium_code, league, json.dumps(weather_json), updated_at))
 
 
 def insert_forecast_weather(
-    stadium_code: str, weather_json: dict, updated_at: datetime
+    stadium_code: str, weather_json: dict, updated_at: datetime, league: str
 ):
-    delete_query = "DELETE FROM forecast_weather WHERE stadium_code = %s"
-    execute(query=delete_query, params=(stadium_code,))
+    delete_query = "DELETE FROM forecast_weather WHERE stadium_code = %s AND league = %s"
+    execute(query=delete_query, params=(stadium_code, league, ))
 
     insert_query = """
-        INSERT INTO forecast_weather (stadium_code, weather_json, updated_at)
-        VALUES (%s, %s, %s)
+        INSERT INTO forecast_weather (stadium_code, league, weather_json, updated_at)
+        VALUES (%s, %s, %s, %s)
     """
-    execute(query=insert_query, params=(stadium_code, json.dumps(weather_json), updated_at))
+    execute(query=insert_query, params=(stadium_code, league, json.dumps(weather_json), updated_at))
 
 
 def get_weather_response(stadium_code: str):
