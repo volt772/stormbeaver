@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from controllers import weather
 from database.database_connection import close_db_pool
 
-app = FastAPI()
+app = FastAPI(root_path="/weather-api")
 
 app.add_middleware(
     CORSMiddleware,
